@@ -1,10 +1,12 @@
 import axios from 'axios'; // Import the Axios library
+let url = "https://restaurant-api.dicoding.dev/"
+let medPictureUrl = "https://restaurant-api.dicoding.dev/images/medium/"
 
 const getRestaurant = () => {
     const restaurantList = document.getElementById("restaurant-list");
 
     // Use Axios to make the HTTP request
-    axios.get('./data/DATA.json')
+    axios.get(`${url}/list`)
         .then(response => {
             const data = response.data;
 
@@ -14,10 +16,10 @@ const getRestaurant = () => {
                 card.setAttribute('class', 'card');
 
                 const restaurantImage = document.createElement('img');
-                restaurantImage.setAttribute('src', restaurant.pictureId)
+                restaurantImage.setAttribute('src', `${medPictureUrl}${restaurant.pictureId}`)
 
                 const restaurantName = document.createElement('h3');
-                restaurantName.innerHTML = `<a href="">${restaurant.name}</a>`;
+                restaurantName.innerText = `${restaurant.name}`;
                 restaurantName.setAttribute('class', 'restaurant-name')
 
                 const textWrap = document.createElement('div');
@@ -35,12 +37,17 @@ const getRestaurant = () => {
                 restaurantDescription.innerText = restaurant.description;
                 restaurantDescription.setAttribute('class', 'restaurant-desc')
 
+                const restaurantDetailButton = document.createElement('button');
+                restaurantDetailButton.setAttribute = ('class', 'detail-button')
+                restaurantDetailButton.innerText = ('Check this Restaurant')
+
                 card.appendChild(restaurantImage);
                 card.appendChild(restaurantName);
                 textWrap.appendChild(restaurantCity);
                 textWrap.appendChild(restaurantRating);
                 card.appendChild(textWrap);
                 card.appendChild(restaurantDescription);
+                card.appendChild(restaurantDetailButton)
                 restaurantList.appendChild(card);
             });
         })
