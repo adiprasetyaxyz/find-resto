@@ -1,21 +1,19 @@
 import 'regenerator-runtime'; /* for async await transpile */
 import '../styles/main.scss';
-import getRestaurant from './restaurant-list';
+import '../styles/responsive.scss';
+// eslint-disable-next-line import/no-named-as-default
+import App from './views/app';
 
-window.addEventListener("DOMContentLoaded", () => {
-
-getRestaurant();
+const app = new App({
+  button: document.querySelector('#hamburger'),
+  drawer: document.querySelector('#drawer'),
+  content: document.querySelector('#main-content'),
 });
-const hamburgerButtonElement = document.querySelector('#hamburger');
-const drawerElement = document.querySelector('#drawer');
-const mainElement = document.querySelector('main');
 
-mainElement.addEventListener('click', event => {
-    drawerElement.classList.remove('open');
-    event.stopPropagation();
-  });
- 
-hamburgerButtonElement.addEventListener('click', event => {
-  drawerElement.classList.toggle('open');
-  event.stopPropagation();
+// getRestaurant();
+window.addEventListener('hashchange', () => {
+  app.renderPage();
+});
+window.addEventListener('load', () => {
+  app.renderPage();
 });
