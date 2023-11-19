@@ -1,20 +1,21 @@
+/* eslint-disable no-console */
 import axios from 'axios';
 import API_ENDPOINT from '../globals/api-endpoint';
 
 class RestaurantSource {
   static async restaurantList() {
     const response = await axios.get(API_ENDPOINT.RESTAURANT_LIST);
-    const { restaurants } = response.data; // Ubah sesuai dengan struktur respons API
+    const { restaurants } = response.data;
 
-    return restaurants || []; // Mengembalikan restaurants atau array kosong jika tidak ada data
+    return restaurants || [];
   }
 
   static async favoriteRestaurant() {
     try {
       const response = await axios.get(API_ENDPOINT.FAVORITE);
-      const { results } = response.data; // Ubah sesuai dengan struktur respons API
+      const { results } = response.data;
 
-      return results || []; // Mengembalikan results atau array kosong jika tidak ada data
+      return results || [];
     } catch (error) {
       console.error('Terjadi kesalahan:', error);
       return [];

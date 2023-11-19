@@ -1,5 +1,19 @@
 import CONFIG from '../../globals/config';
 
+const createRestaurantReviewTemplate = (restaurant) => `
+  <h2>Customer Reviews</h2>
+  <br>
+  <div class="restaurant-reviews">
+    ${restaurant.customerReviews.map((review) => `
+      <div class="customer-review">
+        <b>${review.name}</b>
+        <p>${review.date}</p>
+        <p>${review.review}</p>
+      </div>
+    `).join('')}
+  </div>
+`;
+
 const createLikeButtonTemplate = () => `
   <button aria-label="like this movie" id="likeButton" class="like">
      <i class="fa fa-heart-o" aria-hidden="true"></i>
@@ -12,15 +26,19 @@ const createLikedButtonTemplate = () => `
 `;
 
 const createRestaurantDetailTemplate = (restaurant) => `
-<img src="${CONFIG.BASE_IMAGE_URL}medium/${restaurant.pictureId}" />
-    <h3 class="restaurant-name">${restaurant.name}</h3>
-    <p>Alamat : ${restaurant.address}</p>
-    <p>Deskripsi : ${restaurant.description}</p>
-    <p>Kota : ${restaurant.city}</p>
-    <p>Kategori : ${restaurant.categories.map((category) => category.name).join(', ')}</p>
-    <p>Menu Makanan : ${restaurant.menus.foods.map((foods) => foods.name).join(', ')}</p>
-    <p>Menu Minuman : ${restaurant.menus.drinks.map((drinks) => drinks.name).join(', ')}</p>
-    
+  <img src="${CONFIG.BASE_IMAGE_URL}medium/${restaurant.pictureId}" />
+      <h3 class="restaurant-name">${restaurant.name}</h3>
+      <p>Kota : ${restaurant.city}</p>
+      <p>Alamat : ${restaurant.address}</p>
+      <p>Kategori : ${restaurant.categories.map((category) => category.name).join(', ')}</p>
+      <p>Deskripsi : ${restaurant.description}</p>
+      <div class='card'>
+      <p>Menu Makanan : ${restaurant.menus.foods.map((foods) => foods.name).join('<br> ')}</p>
+      </div>
+      <div class='card'>
+      <p>Menu Minuman : ${restaurant.menus.drinks.map((drinks) => drinks.name).join('<br> ')}</p>
+      </div>
+      <p>Rating : ${restaurant.rating}</p>
 
 `;
 const createHero = () => `<div id="hero">
@@ -57,4 +75,5 @@ export {
   createRestaurantDetailTemplate,
   createLikeButtonTemplate,
   createLikedButtonTemplate,
+  createRestaurantReviewTemplate,
 };
