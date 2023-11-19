@@ -3,6 +3,7 @@ import '../styles/main.scss';
 import '../styles/responsive.scss';
 // eslint-disable-next-line import/no-named-as-default
 import App from './views/app';
+import swRegister from './utils/sw-register';
 
 const app = new App({
   button: document.querySelector('#hamburger'),
@@ -16,4 +17,5 @@ window.addEventListener('hashchange', () => {
 });
 window.addEventListener('load', () => {
   app.renderPage();
+  swRegister();
 });
