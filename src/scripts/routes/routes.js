@@ -5,7 +5,7 @@ import showRestaurant from '../views/pages/restaurant';
 
 const routes = {
   '/': showRestaurant, // default page
-  '/restaurant-list': showRestaurant,
+  '/restaurant': showRestaurant,
   '/favorite': favorite,
   '/detail/:id': detail,
   '/about-us': aboutUs,

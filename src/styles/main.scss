@@ -49,6 +49,8 @@ $yellow: #f5a414;
 body {
   padding: 0;
   margin: 0;
+  margin-top: 80px;
+  height: 100%;
 }
 #drawer.open {
   transform: translate(0,0)
@@ -178,9 +180,11 @@ main {
   padding-bottom: 100px;
   align-items: center;
   margin: auto;
+  min-height: 100%;
 }
 
 #started  {
+  margin-top: -60px;
   >h2, p{
   padding: 0 10%;
   text-align: center;
@@ -215,7 +219,13 @@ height: 180px;
     padding: 10px;
   }
 }
-
+.cta-button {
+  height: 44px;
+  background-color: $yellow;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
 #restaurant-list {
     display: grid;
     grid-template-columns: repeat(3 , 1fr); 
@@ -246,6 +256,7 @@ height: 180px;
    button { min-height: 44px;
     min-width: 44px;
     background-color: white;
+    color: #000000;
     border-radius: 5px;
     border: none;
     padding: 0 10px;
@@ -263,12 +274,9 @@ height: 180px;
 
 .text-wrap {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between ;
+  align-items: center;
   padding: 0 10px;
-  margin-top: -30px;
-}
-
-.restaurant-rating {
   margin-top: -20px;
 }
 .restaurant-name a{
@@ -286,4 +294,132 @@ footer {
   justify-content: center;
   align-items: center;
 }
-/* Main */
+/* Detail */
+
+#restaurant {
+  margin: 5%;
+  img {
+    width: 100%;
+  }
+}
+
+.menu-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2 , 1fr); 
+  gap: 20px;
+  justify-content: center;
+  place-items: center;
+}
+
+.card-menu {
+  min-height: 300px;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: $yellow;
+  box-shadow: 14px 16px 24px -10px rgba(38,38,38,0.52);
+  -webkit-box-shadow: 14px 16px 24px -10px rgba(38,38,38,0.52);
+  -moz-box-shadow: 14px 16px 24px -10px rgba(38,38,38,0.52);
+  .menu-list{
+    text-align: center;
+    color: white;
+  }
+}
+
+.review-container {
+  width: 80%;
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.user-review {
+  margin-bottom: 20px;
+}
+
+.caption-review {
+  font-weight: bold;
+}
+input[type="text"] {
+  height: 44px;
+  width: 100%; 
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; 
+}
+button {
+  padding: 10px 20px;
+  background-color: $yellow;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #be7c08;
+}
+
+
+.restaurant-reviews {
+  margin-top: 20px;
+  width: 100%;
+}
+
+
+.customer-review {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.customer-review b {
+  font-weight: bold;
+}
+
+
+.customer-review p:nth-child(2) {
+  font-style: italic;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+
+.customer-review p:last-child {
+  margin-top: 5px;
+}
+
+#review-resto {
+  width: 80%;
+}
+
+#aboutme {
+  width: 60%;
+  text-align: justify;
+}
+// button
+a,
+
+input,
+
+button,
+
+textarea {
+
+  display: inline-block;
+
+  min-width: 44px;
+
+  min-height: 44px;
+
+}

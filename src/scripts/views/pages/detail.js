@@ -8,8 +8,7 @@ const detail = {
   async render() {
     return `
       <div id="restaurant" class="restaurant"></div>
-      <div id="reviewResto"></div>
-      <div class="review-container">
+      <div class="review-container" >
       <div class="user-review">
         <form id='add-review'>
           <label for="name-review" class="caption-review">Name</label><br>
@@ -20,6 +19,7 @@ const detail = {
         </form>
       </div>
     </div>
+      <div id="reviewResto"></div>
       <div id="likeButtonContainer"></div>
     `;
   },
@@ -79,6 +79,11 @@ const detail = {
         .catch((error) => {
           console.error(error);
         });
+    });
+    const skipLinkElem = document.querySelector('.skip-link');
+    skipLinkElem.addEventListener('click', (event) => {
+      event.preventDefault();
+      document.querySelector('#mainContent').focus();
     });
   },
 };

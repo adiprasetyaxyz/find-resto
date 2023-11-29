@@ -4,7 +4,7 @@ import { createRestaurantList } from '../template/template-creators';
 const favorite = {
   async render() {
     return `
-        <h2>Favorite</h2>
+        <h2 id='mainContent' tabindex="0">Favorite</h2>
         <div id="restaurant-list" class="restaurant-list">
       `;
   },
@@ -15,6 +15,11 @@ const favorite = {
 
     restaurants.forEach((restaurant) => {
       restaurantsContainer.innerHTML += createRestaurantList(restaurant);
+    });
+    const skipLinkElem = document.querySelector('.skip-link');
+    skipLinkElem.addEventListener('click', (event) => {
+      event.preventDefault();
+      document.querySelector('#mainContent').focus();
     });
   },
 };

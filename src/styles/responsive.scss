@@ -8,6 +8,9 @@
   
   }
   @media screen and (max-width: 768px){
+    #logo > img {
+      height: 36px;
+    }
     #restaurant-list {  
       grid-template-columns: repeat(1 , 1fr); 
   }
@@ -25,6 +28,9 @@
     text-decoration: none;
     visibility:visible;
     padding: 10px;
+  }
+  .menu-wrapper {
+    grid-template-columns: repeat(1 , 1fr); 
   }
   #promo {
     grid-template-columns: repeat(1 , 1fr); 
@@ -59,8 +65,27 @@
   }
    #hero-text {
     font-size: 20px;}
-  
+    #started  {
+      margin-top: 10px;
+    }
     }
   
-    @media screen and (max-width: 320px) {}
+    @media screen and (max-width: 320px) {
+      #logo > img {
+        height: 28px;
+      }
+      .card {
+        width: 250px;
+      }
+      .card img {
+        width: 210px;
+        height: 160px;
+        
+        }
+        .card-menu {
+          min-height: 300px;
+          min-width: 250px;
+        }
+        
+    }
     
