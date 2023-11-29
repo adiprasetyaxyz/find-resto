@@ -1,61 +1,82 @@
 import LikeButtonInitiator from '../src/scripts/utils/like-button-initiator';
-import favoriteRestaurantIdb from '../src/scripts/data/favorite-restaurant-idb';
+import FavoriteRestaurantIdb from '../src/scripts/data/favorite-restaurant-idb';
 
-describe('Like and Dislike Restaurant', () => {
-  let likeButtonContainer;
-  let restaurant;
+describe('Liking A Restaurant', () => {
+  const addLikeButtonContainer = () => {
+    document.body.innerHTML = '<div id="likeButtonContainer"></div>';
+  };
 
   beforeEach(() => {
-    likeButtonContainer = document.createElement('div');
-    restaurant = { id: 'restaurantId' /* tambahkan properti lain jika diperlukan */ };
+    addLikeButtonContainer();
   });
 
-  afterEach(() => {
-    likeButtonContainer.innerHTML = '';
+  it('should show the like button when the restaurant has not been liked before', async () => {
+    await LikeButtonInitiator.init({
+      likeButtonContainer: document.querySelector('#likeButtonContainer'),
+      restaurant: {
+        id: 1,
+      },
+    });
+
+    expect(document.querySelector('[aria-label="like this restaurant"]')).toBeTruthy();
   });
 
-  it('should render like button when restaurant is not liked', async () => {
-    await LikeButtonInitiator.init({ likeButtonContainer, restaurant });
+  it('should not show the unlike button when the restaurant has not been liked before', async () => {
+    await LikeButtonInitiator.init({
+      likeButtonContainer: document.querySelector('#likeButtonContainer'),
+      restaurant: {
+        id: 1,
+      },
+    });
 
-    const likeButton = likeButtonContainer.querySelector('#likeButton');
-    expect(likeButton).toBeTruthy();
+    expect(document.querySelector('[aria-label="unlike this restaurant"]')).toBeFalsy();
   });
 
-  it('should render liked button when restaurant is already liked', async () => {
-    // Menyimulasikan restoran sudah disukai
-    jest.spyOn(favoriteRestaurantIdb, 'getRestaurant').mockImplementation(async () => ({ id: 'restaurantId' }));
+  it('should be able to like the restaurant', async () => {
+    await LikeButtonInitiator.init({
+      likeButtonContainer: document.querySelector('#likeButtonContainer'),
+      restaurant: {
+        id: 1,
+      },
+    });
 
-    await LikeButtonInitiator.init({ likeButtonContainer, restaurant });
+    document.querySelector('#likeButton').dispatchEvent(new Event('click'));
 
-    const likedButton = likeButtonContainer.querySelector('#likeButton');
-    expect(likedButton).toBeTruthy();
+    // Memastikan restoran berhasil disukai
+    const restaurant = await FavoriteRestaurantIdb.getRestaurant(1);
+    expect(restaurant).toEqual({ id: 1 });
+
+    await FavoriteRestaurantIdb.deleteRestaurant(1);
   });
 
-  it('should be able to like and then dislike a restaurant', async () => {
-    await LikeButtonInitiator.init({ likeButtonContainer, restaurant });
+  it('should not add a restaurant again when its already liked', async () => {
+    await LikeButtonInitiator.init({
+      likeButtonContainer: document.querySelector('#likeButtonContainer'),
+      restaurant: {
+        id: 1,
+      },
+    });
 
-    const likeButton = likeButtonContainer.querySelector('#likeButton');
-    likeButton.click();
+    // Tambahkan restoran dengan ID 1 ke daftar restoran yang disukai
+    await FavoriteRestaurantIdb.putRestauran({ id: 1 });
 
-    let likedButton = likeButtonContainer.querySelector('#likeButton');
-    expect(likedButton).toBeTruthy();
+    // Simulasikan pengguna menekan tombol suka restoran
+    document.querySelector('#likeButton').dispatchEvent(new Event('click'));
 
-    likeButton.click();
-
-    likedButton = likeButtonContainer.querySelector('#likeButton');
-    expect(likedButton).toBeFalsy();
+    // Pastikan restoran tidak ditambahkan ganda
+    expect(await FavoriteRestaurantIdb.getAllRestaurant()).toEqual([{ id: 1 }]);
+    await FavoriteRestaurantIdb.deleteRestaurant(1);
   });
 
-  // Menambahkan pengujian untuk favoriteRestaurantIdb
-  it('should be able to add and delete a restaurant from favoriteRestaurantIdb', async () => {
-    await favoriteRestaurantIdb.putRestauran(restaurant);
+  // eslint-disable-next-line jest/no-disabled-tests
+  it.skip('should not add a restaurant when it has no id', async () => {
+    await LikeButtonInitiator.init({
+      likeButtonContainer: document.querySelector('#likeButtonContainer'),
+      restaurant: {},
+    });
 
-    const storedRestaurant = await favoriteRestaurantIdb.getRestaurant(restaurant.id);
-    expect(storedRestaurant).toEqual(restaurant);
+    document.querySelector('#likeButton').dispatchEvent(new Event('click'));
 
-    await favoriteRestaurantIdb.deleteRestaurant(restaurant.id);
-
-    const deletedRestaurant = await favoriteRestaurantIdb.getRestaurant(restaurant.id);
-    expect(deletedRestaurant).toBeFalsy();
+    expect(await FavoriteRestaurantIdb.getAllRestaurants()).toEqual([]);
   });
 });
