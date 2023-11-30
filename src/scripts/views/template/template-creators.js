@@ -44,18 +44,21 @@ const createRestaurantDetailTemplate = (restaurant) => `
       </div>
 
 `;
-const createHero = () => `<div id="hero">
-        <img src="./images/heros/hero-image_2.jpg"  alt="hero-image" />
+const createHero = () => `
+<picture>
+<source media="(max-width: 600px)" srcset="./images/hero-image_2-small.jpg">
+        <img src="./images/hero-image_2-large.jpg"  alt="hero-image" />
+        </picture>
         <div id="hero-text">
           <h1>Find Resto</h1>
           <button>Top Restaurants</button>
           
         </div>
-      </div>`;
+      `;
 
 const createRestaurantList = (restaurant) => `
-  <div class="card">
-    <img src="${CONFIG.BASE_IMAGE_URL}small/${restaurant.pictureId}" alt='gambar restaurant ${restaurant.name}' />
+  <div class="card restaurant-item">
+    <img src="${CONFIG.BASE_IMAGE_URL}small/${restaurant.pictureId}" class="lazyload" alt='gambar restaurant ${restaurant.name}' />
     <h3 class="restaurant-name">${restaurant.name}</h3>
     <div class="text-wrap">
       <h4>

@@ -85,6 +85,9 @@ body {
 
    }}
 }
+.promo-wrapper > img {
+  min-width: 50px;
+}
 #hamburger {
   list-style: none;
   color: black;
@@ -92,45 +95,53 @@ body {
   text-decoration: none;
   visibility: hidden;
 }
-#hero > img {
-  width: 100%;
-  height: 500px;
-  object-fit: none;
-  left: 0;
-  right: 0;
-  margin: 0;
-}
 #hero {
+  position: relative; /* Menjadikan kontainer hero posisi relatif */
   width: 100%;
+  /* Tambahkan properti lain jika diperlukan */
 }
+
+#hero > picture > img {
+  width: 100%; /* Menyesuaikan lebar gambar dengan kontainer */
+  height: 500px; /* Membuat tinggi gambar otomatis sesuai rasio aslinya */
+  object-fit: cover; /* Memastikan gambar terisi sepenuhnya di dalam kotak tanpa merubah rasio aslinya */
+  /* Jika ingin mengatur objek untuk menutupi area tanpa memperhatikan rasio aslinya */
+  /* object-fit: fill; */
+}
+
 #hero > #hero-text {
-  margin-top: -300px;
-  padding-bottom: 300px;
+  position: absolute; /* Menjadikan elemen hero-text posisi absolut */
+  top: 50%; /* Menggeser elemen ke tengah secara vertikal */
+  left: 50%; /* Menggeser elemen ke tengah secara horizontal */
+  transform: translate(-50%, -50%); /* Mengatur ulang posisi elemen agar tepat di tengah */
   text-align: center;
   color: white;
   font-size: 24px;
-  color: white;
   text-shadow: 2px 2px 4px #000000;
-  padding-left:  10%;
+  padding-left: 10%;
   padding-right: 10%;
+
   button:hover {
     background-color: #ffc96d;
   }
+
   button {
-  background-color:$yellow;
-  min-height: 44px;
-  min-width: 44px;
-  padding: 0 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  color: white;
+    background-color: $yellow;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+  }
+
   a {
     color: white;
     text-decoration: none;
   }
-  }
 }
+
 
 #link {
   margin-right: -30%;
@@ -232,6 +243,13 @@ height: 180px;
     justify-content: center;
     gap: 20px;
 }
+#restaurants {
+  display: grid;
+  grid-template-columns: repeat(3 , 1fr); 
+  justify-content: center;
+  gap: 20px;
+}
+
 
 #promo {
   display: grid;

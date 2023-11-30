@@ -2,6 +2,9 @@
     #restaurant-list {  
       grid-template-columns: repeat(2 , 1fr); 
   }
+  #restaurants {  
+    grid-template-columns: repeat(2 , 1fr); 
+}
   main {
     margin-top: 100px;
   }
@@ -14,6 +17,9 @@
     #restaurant-list {  
       grid-template-columns: repeat(1 , 1fr); 
   }
+  #restaurants {  
+    grid-template-columns: repeat(1 , 1fr); 
+}
   #link {
     display: none;
     visibility: hidden;
