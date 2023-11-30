@@ -2,6 +2,27 @@ $main-color: #EAE7DE;
 $second-color: #C7A17C;
 $accent-color: #2F271C;
 $yellow: #f5a414;
+/*
+  Like
+*/
+.like {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #db0000;
+  
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  border-radius: 50%;
+  border: 0;
+  
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+}
 /* header */
 #logo > img {
   height: 48px;
@@ -28,6 +49,8 @@ $yellow: #f5a414;
 body {
   padding: 0;
   margin: 0;
+  margin-top: 80px;
+  height: 100%;
 }
 #drawer.open {
   transform: translate(0,0)
@@ -38,7 +61,7 @@ body {
   padding: 20px;
   width: 100%;
   color: black;
-  margin-top: 60px;
+  margin-top: -30px;
   position: fixed;
   min-height: 220px;
  
@@ -48,7 +71,7 @@ body {
   transition: background-color 0.3s;
   padding: 0 50px;
    /* menyembunyikan #drawer -250px (sesuai dengan ukuran lebar drawer) ke kiri */
-   transform: translate(0, -300px);
+   transform: translate(0, -400px);
    transition: transform 0.3s ease-in-out;
    ul li{
     list-style: none;
@@ -62,6 +85,9 @@ body {
 
    }}
 }
+.promo-wrapper > img {
+  min-width: 50px;
+}
 #hamburger {
   list-style: none;
   color: black;
@@ -69,42 +95,53 @@ body {
   text-decoration: none;
   visibility: hidden;
 }
-#hero > img {
-  display: block;
+#hero {
+  position: relative; /* Menjadikan kontainer hero posisi relatif */
   width: 100%;
-  height: 600px;
-  object-fit: none;
-  left: 0;
-  right: 0;
+  /* Tambahkan properti lain jika diperlukan */
 }
+
+#hero > picture > img {
+  width: 100%; /* Menyesuaikan lebar gambar dengan kontainer */
+  height: 500px; /* Membuat tinggi gambar otomatis sesuai rasio aslinya */
+  object-fit: cover; /* Memastikan gambar terisi sepenuhnya di dalam kotak tanpa merubah rasio aslinya */
+  /* Jika ingin mengatur objek untuk menutupi area tanpa memperhatikan rasio aslinya */
+  /* object-fit: fill; */
+}
+
 #hero > #hero-text {
-  margin-top: -400px;
-  padding-bottom: 300px;
+  position: absolute; /* Menjadikan elemen hero-text posisi absolut */
+  top: 50%; /* Menggeser elemen ke tengah secara vertikal */
+  left: 50%; /* Menggeser elemen ke tengah secara horizontal */
+  transform: translate(-50%, -50%); /* Mengatur ulang posisi elemen agar tepat di tengah */
   text-align: center;
   color: white;
   font-size: 24px;
-  color: white;
   text-shadow: 2px 2px 4px #000000;
-  padding-left:  10%;
+  padding-left: 10%;
   padding-right: 10%;
+
   button:hover {
     background-color: #ffc96d;
   }
+
   button {
-  background-color:$yellow;
-  min-height: 44px;
-  min-width: 44px;
-  padding: 0 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  color: white;
+    background-color: $yellow;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+  }
+
   a {
     color: white;
     text-decoration: none;
   }
-  }
 }
+
 
 #link {
   margin-right: -30%;
@@ -151,12 +188,14 @@ body {
 main {
  display: flex;
  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   padding-bottom: 100px;
+  align-items: center;
+  margin: auto;
+  min-height: 100%;
 }
 
 #started  {
+  margin-top: -60px;
   >h2, p{
   padding: 0 10%;
   text-align: center;
@@ -191,13 +230,26 @@ height: 180px;
     padding: 10px;
   }
 }
-
+.cta-button {
+  height: 44px;
+  background-color: $yellow;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
 #restaurant-list {
     display: grid;
     grid-template-columns: repeat(3 , 1fr); 
     justify-content: center;
     gap: 20px;
 }
+#restaurants {
+  display: grid;
+  grid-template-columns: repeat(3 , 1fr); 
+  justify-content: center;
+  gap: 20px;
+}
+
 
 #promo {
   display: grid;
@@ -222,6 +274,7 @@ height: 180px;
    button { min-height: 44px;
     min-width: 44px;
     background-color: white;
+    color: #000000;
     border-radius: 5px;
     border: none;
     padding: 0 10px;
@@ -239,12 +292,9 @@ height: 180px;
 
 .text-wrap {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between ;
+  align-items: center;
   padding: 0 10px;
-  margin-top: -30px;
-}
-
-.restaurant-rating {
   margin-top: -20px;
 }
 .restaurant-name a{
@@ -262,70 +312,132 @@ footer {
   justify-content: center;
   align-items: center;
 }
-/* Main */
-@media screen and (max-width: 1000px){
-  #restaurant-list {  
-    grid-template-columns: repeat(2 , 1fr); 
-}
-main {
-  margin-top: 100px;
-}
+/* Detail */
 
-}
-@media screen and (max-width: 768px){
-  #restaurant-list {  
-    grid-template-columns: repeat(1 , 1fr); 
-}
-#link {
-  display: none;
-  visibility: hidden;
-  margin-right: -60%;
-
-}
-
-#hamburger {
-  list-style: none;
-  color: black;
-  font-size: 30px;
-  text-decoration: none;
-  visibility:visible;
-  padding: 10px;
-}
-#promo {
-  grid-template-columns: repeat(1 , 1fr); 
-  gap: 10px;
-}
-#drawer {
-  display: flex;
-  justify-content: end;
-  ul li a{
-    min-height: 44px;
-  }
-}
-#hero > #hero-text 
-
-{
-  margin-bottom: -200px;
-}
-
-
-#promo {
+#restaurant {
+  margin: 5%;
   img {
-    width: 100px;
+    width: 100%;
   }
 }
-.promo-wrapper {
-  h2 {
-    font-size: 18px;
-  }
-  h3 {
-    font-size: 14px;
+
+.menu-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2 , 1fr); 
+  gap: 20px;
+  justify-content: center;
+  place-items: center;
+}
+
+.card-menu {
+  min-height: 300px;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: $yellow;
+  box-shadow: 14px 16px 24px -10px rgba(38,38,38,0.52);
+  -webkit-box-shadow: 14px 16px 24px -10px rgba(38,38,38,0.52);
+  -moz-box-shadow: 14px 16px 24px -10px rgba(38,38,38,0.52);
+  .menu-list{
+    text-align: center;
+    color: white;
   }
 }
- #hero-text {
-  font-size: 20px;}
 
-  }
+.review-container {
+  width: 80%;
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  background-color: #fff;
+}
 
-  @media screen and (max-width: 320px) {}
-  
+.user-review {
+  margin-bottom: 20px;
+}
+
+.caption-review {
+  font-weight: bold;
+}
+input[type="text"] {
+  height: 44px;
+  width: 100%; 
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; 
+}
+button {
+  padding: 10px 20px;
+  background-color: $yellow;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #be7c08;
+}
+
+
+.restaurant-reviews {
+  margin-top: 20px;
+  width: 100%;
+}
+
+
+.customer-review {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.customer-review b {
+  font-weight: bold;
+}
+
+
+.customer-review p:nth-child(2) {
+  font-style: italic;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+
+.customer-review p:last-child {
+  margin-top: 5px;
+}
+
+#review-resto {
+  width: 80%;
+}
+
+#aboutme {
+  width: 60%;
+  text-align: justify;
+}
+// button
+a,
+
+input,
+
+button,
+
+textarea {
+
+  display: inline-block;
+
+  min-width: 44px;
+
+  min-height: 44px;
+
+}
